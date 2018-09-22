@@ -1,6 +1,12 @@
 package com.makeryourevent.repository;
 
 import com.makeryourevent.model.Event;
+import com.makeryourevent.util.CalendarUtils;
+
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 public class EventRepository {
 
@@ -14,9 +20,13 @@ public class EventRepository {
             throw new IllegalArgumentException("Invalid name");
         }
 
-        if(!isValidDate(event.getStartDateEvent(), event.getEndDateEvent())){
+        if (!isValidDate(event.getStartDateEvent(), event.getEndDateEvent())) {
             throw new IllegalArgumentException("Invalid date");
         }
+    }
+
+    public List<Event> getListOfEvents() {
+        return Collections.emptyList();
     }
 
 
@@ -25,6 +35,12 @@ public class EventRepository {
     }
 
     private boolean isValidDate(String startDate, String endDate) {
-        return startDate != null && endDate != null;
+        if (startDate != null || endDate != null) {
+            Date start = CalendarUtils.stringToDate(startDate);
+            Date end = CalendarUtils.stringToDate(endDate);
+            return !CalendarUtils.isExpired(start, end);
+        }
+        return false;
+
     }
 }
