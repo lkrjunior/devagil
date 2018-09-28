@@ -3,10 +3,7 @@ package com.makeryourevent.repository;
 import com.makeryourevent.model.Event;
 import com.makeryourevent.util.CalendarUtils;
 
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class EventRepository {
 
@@ -26,9 +23,8 @@ public class EventRepository {
     }
 
     public List<Event> getListOfEvents() {
-        return Collections.emptyList();
+        return new ArrayList<Event>();
     }
-
 
     private boolean isValidName(String name) {
         return name != null && name.length() <= 150;
