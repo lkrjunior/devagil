@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_makeyourevent" default="compile.module.makeyourevent">
+  <dirname property="module.makeyourevent.basedir" file="${ant.file.module_makeyourevent}"/>
+  
+  <property name="module.jdk.home.makeyourevent" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.makeyourevent" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.makeyourevent" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.makeyourevent" value="-encoding UTF-8 -source 5 -target 1.5 ${compiler.args}"/>
+  
+  <property name="makeyourevent.output.dir" value="${module.makeyourevent.basedir}/target/classes"/>
+  <property name="makeyourevent.testoutput.dir" value="${module.makeyourevent.basedir}/target/test-classes"/>
+  
+  <path id="makeyourevent.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="makeyourevent.module.production.classpath">
+    <path refid="${module.jdk.classpath.makeyourevent}"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-web:unknown.classpath"/>
+  </path>
+  
+  <path id="makeyourevent.runtime.production.module.classpath">
+    <pathelement location="${makeyourevent.output.dir}"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-web:unknown.classpath"/>
+  </path>
+  
+  <path id="makeyourevent.module.classpath">
+    <path refid="${module.jdk.classpath.makeyourevent}"/>
+    <pathelement location="${makeyourevent.output.dir}"/>
+    <path refid="library.maven:_junit:junit:4.12.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-web:unknown.classpath"/>
+  </path>
+  
+  <path id="makeyourevent.runtime.module.classpath">
+    <pathelement location="${makeyourevent.testoutput.dir}"/>
+    <pathelement location="${makeyourevent.output.dir}"/>
+    <path refid="library.maven:_junit:junit:4.12.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+    <path refid="library.maven:_org.springframework.boot:spring-boot-starter-web:unknown.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.makeyourevent">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.makeyourevent">
+    <patternset refid="excluded.from.module.makeyourevent"/>
+  </patternset>
+  
+  <path id="makeyourevent.module.sourcepath">
+    <dirset dir="${module.makeyourevent.basedir}">
+      <include name="src/main/java"/>
+    </dirset>
+  </path>
+  
+  <path id="makeyourevent.module.test.sourcepath">
+    <dirset dir="${module.makeyourevent.basedir}">
+      <include name="src/test/java"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.makeyourevent" depends="compile.module.makeyourevent.production,compile.module.makeyourevent.tests" description="Compile module MakeYourEvent"/>
+  
+  <target name="compile.module.makeyourevent.production" depends="register.custom.compilers" description="Compile module MakeYourEvent; production classes">
+    <mkdir dir="${makeyourevent.output.dir}"/>
+    <javac2 destdir="${makeyourevent.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.makeyourevent}/javac">
+      <compilerarg line="${compiler.args.makeyourevent}"/>
+      <bootclasspath refid="makeyourevent.module.bootclasspath"/>
+      <classpath refid="makeyourevent.module.production.classpath"/>
+      <src refid="makeyourevent.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.makeyourevent"/>
+    </javac2>
+    
+    <copy todir="${makeyourevent.output.dir}">
+      <fileset dir="${module.makeyourevent.basedir}/src/main/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.makeyourevent.tests" depends="register.custom.compilers,compile.module.makeyourevent.production" description="compile module MakeYourEvent; test classes" unless="skip.tests">
+    <mkdir dir="${makeyourevent.testoutput.dir}"/>
+    <javac2 destdir="${makeyourevent.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.makeyourevent}/javac">
+      <compilerarg line="${compiler.args.makeyourevent}"/>
+      <bootclasspath refid="makeyourevent.module.bootclasspath"/>
+      <classpath refid="makeyourevent.module.classpath"/>
+      <src refid="makeyourevent.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.makeyourevent"/>
+    </javac2>
+    
+    <copy todir="${makeyourevent.testoutput.dir}">
+      <fileset dir="${module.makeyourevent.basedir}/src/test/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.makeyourevent" description="cleanup module">
+    <delete dir="${makeyourevent.output.dir}"/>
+    <delete dir="${makeyourevent.testoutput.dir}"/>
+  </target>
+</project>
