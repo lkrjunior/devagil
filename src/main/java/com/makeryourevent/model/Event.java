@@ -2,9 +2,18 @@ package com.makeryourevent.model;
 
 public class Event {
 
+    private int id;
     private String eventName;
     private String startDateEvent;
     private String endDateEvent;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getEventName() {
         return eventName;
