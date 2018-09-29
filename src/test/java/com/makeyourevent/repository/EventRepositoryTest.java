@@ -30,10 +30,19 @@ public class EventRepositoryTest {
         Date start = CalendarUtils.stringToDate("2050-12-21T23:59:00");
         Date end = CalendarUtils.stringToDate("2051-01-01T23:59:00");
         Event event = new Event();
+        IllegalArgumentException exception = null;
         event.setEventName("Evento de teste");
         event.setStartDateEvent(CalendarUtils.dateToString(start));
         event.setEndDateEvent(CalendarUtils.dateToString(end));
-        repository.saveEvent(event);
+        try {
+            repository.saveEvent(event);
+        }catch (IllegalArgumentException e) {
+            exception = e;
+        }
+
+       Assert.assertNull(exception);
+
+
     }
 
     @Test
