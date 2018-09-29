@@ -17,6 +17,13 @@ public class CalendarUtilsTest {
     public void isValidDateEvent() {
         Date startDate = CalendarUtils.stringToDate("2018-09-20T22:36:00");
         Date endDate = CalendarUtils.stringToDate("2018-09-20T22:36:00");
-        Assert.assertTrue(CalendarUtils.isExpired(startDate, endDate));
+        Assert.assertTrue(CalendarUtils.isExpiredEvent(startDate, endDate));
+    }
+
+    @Test
+    public void isValidDateTicket() {
+        Date startDate = CalendarUtils.stringToDate("2018-10-20T22:36:00");
+        Date endDate = CalendarUtils.stringToDate("2018-11-20T22:36:00");
+        Assert.assertFalse(CalendarUtils.isExpiredTicket(startDate, endDate));
     }
 }

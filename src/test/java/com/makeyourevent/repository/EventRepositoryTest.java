@@ -1,6 +1,7 @@
 package com.makeyourevent.repository;
 
 import com.makeryourevent.model.Event;
+import com.makeryourevent.model.Ticket;
 import com.makeryourevent.model.TicketType;
 import com.makeryourevent.repository.EventRepository;
 import com.makeyourevent.fixture.EventFixture;
@@ -30,11 +31,11 @@ public class EventRepositoryTest {
 
         try {
             repository.saveEvent(event);
-        }catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             exception = e;
         }
 
-       Assert.assertNull(exception);
+        Assert.assertNull(exception);
     }
 
     @Test
@@ -45,7 +46,7 @@ public class EventRepositoryTest {
     @Test
     public void shouldReturnThePriceOfTicket() {
         Double expected = 1000.00;
-       TicketType ticket = TicketFixture.createType(TicketType.VIP);
+        TicketType ticket = TicketFixture.createType(TicketType.VIP);
         Assert.assertEquals(expected, ticket.getPrice());
     }
 }
