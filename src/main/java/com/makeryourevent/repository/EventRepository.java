@@ -66,6 +66,6 @@ public class EventRepository {
             }
         }
 
-        return count > 0;
+        return tickets.size() == tickets.stream().collect(Collectors.groupingBy(Ticket::getType)).size();
     }
 }

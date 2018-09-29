@@ -26,7 +26,6 @@ public class EventFixture {
         List<Ticket> tickets = new ArrayList<>();
         tickets.add(TicketFixture.createTicket(TicketType.VIP));
         tickets.add(TicketFixture.createTicket(TicketType.BACKSTAGE));
-        tickets.add(TicketFixture.createTicket(TicketType.VIP));
 
         event.setTickets(tickets);
         return event;
