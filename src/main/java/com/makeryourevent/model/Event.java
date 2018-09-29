@@ -1,14 +1,12 @@
 package com.makeryourevent.model;
 
-import java.util.LinkedHashMap;
-
 public class Event {
 
     private int id;
     private String eventName;
     private String startDateEvent;
     private String endDateEvent;
-    private LinkedHashMap<TicketType, Ticket> tickets;
+    private TicketType[] tickets;
 
     public int getId() {
         return id;
@@ -42,11 +40,11 @@ public class Event {
         this.endDateEvent = endDateEvent;
     }
 
-    public LinkedHashMap<TicketType, Ticket> getTickets() {
+    public TicketType[] getTickets() {
         return tickets;
     }
 
-    public void setTickets(LinkedHashMap<TicketType, Ticket> tickets) {
+    public void setTickets(TicketType[] tickets) {
         this.tickets = tickets;
     }
 }
