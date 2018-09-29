@@ -12,13 +12,17 @@ public class EventRepository {
         return new Event();
     }
 
-    public void saveEvent(Event event) throws IllegalArgumentException{
+    public void saveEvent(Event event) throws IllegalArgumentException {
         if (!isValidName(event.getEventName())) {
             throw new IllegalArgumentException("Invalid name");
         }
 
         if (!isValidDate(event.getStartDateEvent(), event.getEndDateEvent())) {
             throw new IllegalArgumentException("Invalid date");
+        }
+
+        if (event.getTickets().size() == 0) {
+            throw new IllegalArgumentException("Invalid tickets");
         }
     }
 
