@@ -1,13 +1,14 @@
 package com.makeyourevent.repository;
 
 import com.makeryourevent.model.Event;
+import com.makeryourevent.model.Ticket;
+import com.makeryourevent.model.TicketType;
 import com.makeryourevent.repository.EventRepository;
 import com.makeryourevent.util.CalendarUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Calendar;
 import java.util.Date;
 
 public class EventRepositoryTest {
@@ -48,5 +49,14 @@ public class EventRepositoryTest {
     @Test
     public void getListOfEvents() {
         Assert.assertNotNull(repository.getListOfEvents());
+    }
+
+    @Test
+    public void getPriceOfTicket() {
+        Double expected = 1000.00;
+        Ticket ticket = new Ticket();
+        ticket.setType(TicketType.VIP);
+        ticket.setQuantity(1);
+        Assert.assertEquals(expected, ticket.getPrice());
     }
 }
