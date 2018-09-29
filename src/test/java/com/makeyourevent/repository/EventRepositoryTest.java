@@ -21,16 +21,17 @@ public class EventRepositoryTest {
         repository = new EventRepository();
     }
 
-
     @Test
-    public void getUserById() {
+    public void shouldReturnAUserById() {
         Assert.assertNotNull(repository.getEventById(1));
     }
 
     @Test
-    public void saveEvent() {
+    public void shouldSaveEvent() {
+        IllegalArgumentException exception = null;
         Date start = CalendarUtils.stringToDate("2050-12-21T23:59:00");
         Date end = CalendarUtils.stringToDate("2051-01-01T23:59:00");
+
         Ticket ticket = new Ticket();
         ticket.setType(TicketType.VIP);
         ticket.setQuantity(50);
@@ -38,11 +39,11 @@ public class EventRepositoryTest {
         tickets.put(TicketType.VIP, ticket);
 
         Event event = new Event();
-        IllegalArgumentException exception = null;
         event.setEventName("Evento de teste");
         event.setStartDateEvent(CalendarUtils.dateToString(start));
         event.setEndDateEvent(CalendarUtils.dateToString(end));
         event.setTickets(tickets);
+
         try {
             repository.saveEvent(event);
         }catch (IllegalArgumentException e) {
@@ -53,16 +54,17 @@ public class EventRepositoryTest {
     }
 
     @Test
-    public void getListOfEvents() {
+    public void shouldReturnAValidListOfEvents() {
         Assert.assertNotNull(repository.getListOfEvents());
     }
 
     @Test
-    public void getPriceOfTicket() {
+    public void shouldReturnThePriceOfTicket() {
         Double expected = 1000.00;
         Ticket ticket = new Ticket();
         ticket.setType(TicketType.VIP);
         ticket.setQuantity(1);
+
         Assert.assertEquals(expected, ticket.getPrice());
     }
 }
