@@ -1,16 +1,13 @@
 package com.makeyourevent.repository;
 
 import com.makeryourevent.model.Event;
-import com.makeryourevent.model.Ticket;
 import com.makeryourevent.model.TicketType;
 import com.makeryourevent.repository.EventRepository;
-import com.makeryourevent.util.CalendarUtils;
+import com.makeyourevent.fixture.EventFixture;
+import com.makeyourevent.fixture.TicketFixture;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Date;
-import java.util.LinkedHashMap;
 
 public class EventRepositoryTest {
 
@@ -29,20 +26,7 @@ public class EventRepositoryTest {
     @Test
     public void shouldSaveEvent() {
         IllegalArgumentException exception = null;
-        Date start = CalendarUtils.stringToDate("2050-12-21T23:59:00");
-        Date end = CalendarUtils.stringToDate("2051-01-01T23:59:00");
-
-        Ticket ticket = new Ticket();
-        ticket.setType(TicketType.VIP);
-        ticket.setQuantity(50);
-        LinkedHashMap<TicketType, Ticket> tickets = new LinkedHashMap<>();
-        tickets.put(TicketType.VIP, ticket);
-
-        Event event = new Event();
-        event.setEventName("Evento de teste");
-        event.setStartDateEvent(CalendarUtils.dateToString(start));
-        event.setEndDateEvent(CalendarUtils.dateToString(end));
-        event.setTickets(tickets);
+        Event event = EventFixture.createEvent();
 
         try {
             repository.saveEvent(event);
@@ -61,10 +45,7 @@ public class EventRepositoryTest {
     @Test
     public void shouldReturnThePriceOfTicket() {
         Double expected = 1000.00;
-        Ticket ticket = new Ticket();
-        ticket.setType(TicketType.VIP);
-        ticket.setQuantity(1);
-
+       TicketType ticket = TicketFixture.createType(TicketType.VIP);
         Assert.assertEquals(expected, ticket.getPrice());
     }
 }
