@@ -12,7 +12,7 @@ public class EventRepository {
         return new Event();
     }
 
-    public void saveEvent(Event event) {
+    public void saveEvent(Event event) throws IllegalArgumentException{
         if (!isValidName(event.getEventName())) {
             throw new IllegalArgumentException("Invalid name");
         }
