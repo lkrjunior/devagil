@@ -21,7 +21,7 @@ public class EventRepository {
             throw new IllegalArgumentException("Invalid date");
         }
 
-        if (event.getTickets().size() == 0) {
+        if (event.getTickets() == null) {
             throw new IllegalArgumentException("Invalid tickets");
         }
     }
