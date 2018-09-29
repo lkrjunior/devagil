@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Date;
+import java.util.LinkedHashMap;
 
 public class EventRepositoryTest {
 
@@ -30,11 +31,18 @@ public class EventRepositoryTest {
     public void saveEvent() {
         Date start = CalendarUtils.stringToDate("2050-12-21T23:59:00");
         Date end = CalendarUtils.stringToDate("2051-01-01T23:59:00");
+        Ticket ticket = new Ticket();
+        ticket.setType(TicketType.VIP);
+        ticket.setQuantity(50);
+        LinkedHashMap<TicketType, Ticket> tickets = new LinkedHashMap<>();
+        tickets.put(TicketType.VIP, ticket);
+
         Event event = new Event();
         IllegalArgumentException exception = null;
         event.setEventName("Evento de teste");
         event.setStartDateEvent(CalendarUtils.dateToString(start));
         event.setEndDateEvent(CalendarUtils.dateToString(end));
+        event.setTickets(tickets);
         try {
             repository.saveEvent(event);
         }catch (IllegalArgumentException e) {
@@ -42,8 +50,6 @@ public class EventRepositoryTest {
         }
 
        Assert.assertNull(exception);
-
-
     }
 
     @Test
