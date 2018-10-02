@@ -5,6 +5,7 @@ public class Ticket {
    private TicketType type;
    private int quantity;
 
+
     public TicketType getType() {
         return type;
     }

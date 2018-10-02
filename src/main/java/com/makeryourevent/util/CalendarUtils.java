@@ -16,9 +16,19 @@ public class CalendarUtils {
         }
     }
 
-    public static boolean isExpired(Date startDate, Date endDate) {
+    public static boolean isExpiredEvent(Date startDate, Date endDate) {
         Date today = Calendar.getInstance().getTime();
         return startDate.before(today) && today.after(endDate);
+    }
+
+    public static boolean isExpiredTicket(Date startDate, Date endDate) {
+        return startDate.after(endDate);
+    }
+
+    public static boolean isExpiredTicket(String startDate, String endDate) {
+        Date start = stringToDate(startDate);
+        Date end = stringToDate(endDate);
+        return isExpiredTicket(start, end);
     }
 
     public static String dateToString(Date date) {

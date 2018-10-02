@@ -1,12 +1,16 @@
 package com.makeryourevent.model;
 
+import java.util.List;
+
 public class Event {
 
     private int id;
     private String eventName;
     private String startDateEvent;
     private String endDateEvent;
-    private TicketType[] tickets;
+    private List<Ticket> tickets;
+    private String startTicketDate;
+    private String endTicketDate;
 
     public int getId() {
         return id;
@@ -40,11 +44,27 @@ public class Event {
         this.endDateEvent = endDateEvent;
     }
 
-    public TicketType[] getTickets() {
+    public List<Ticket> getTickets() {
         return tickets;
     }
 
-    public void setTickets(TicketType[] tickets) {
+    public void setTickets(List<Ticket> tickets) {
         this.tickets = tickets;
+    }
+
+    public String getStartTicketDate() {
+        return startTicketDate;
+    }
+
+    public void setStartTicketDate(String startTicketDate) {
+        this.startTicketDate = startTicketDate;
+    }
+
+    public String getEndTicketDate() {
+        return endTicketDate;
+    }
+
+    public void setEndTicketDate(String endTicketDate) {
+        this.endTicketDate = endTicketDate;
     }
 }

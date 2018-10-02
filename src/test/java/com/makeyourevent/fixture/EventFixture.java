@@ -1,10 +1,13 @@
 package com.makeyourevent.fixture;
 
 import com.makeryourevent.model.Event;
+import com.makeryourevent.model.Ticket;
 import com.makeryourevent.model.TicketType;
 import com.makeryourevent.util.CalendarUtils;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class EventFixture {
 
@@ -16,7 +19,15 @@ public class EventFixture {
         event.setEventName("Evento de teste");
         event.setStartDateEvent(CalendarUtils.dateToString(start));
         event.setEndDateEvent(CalendarUtils.dateToString(end));
-        event.setTickets(TicketType.values());
+
+        event.setStartTicketDate("2050-02-21T23:59:00");
+        event.setEndTicketDate("2051-03-01T23:59:00");
+
+        List<Ticket> tickets = new ArrayList<>();
+        tickets.add(TicketFixture.createTicket(TicketType.VIP));
+        tickets.add(TicketFixture.createTicket(TicketType.BACKSTAGE));
+
+        event.setTickets(tickets);
         return event;
     }
 }
