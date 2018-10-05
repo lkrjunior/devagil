@@ -40,8 +40,8 @@ public class EventRepository {
         return name != null && name.length() <= 150;
     }
 
-    private boolean isValidEventDate(String startDate, String endDate) {
-        if(startDate == null || endDate == null) {
+    public boolean isValidEventDate(String startDate, String endDate) {
+        if (startDate == null || endDate == null) {
             return false;
         }
 

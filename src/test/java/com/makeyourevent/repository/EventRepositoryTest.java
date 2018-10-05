@@ -58,6 +58,11 @@ public class EventRepositoryTest {
     public void shouldValidateDuplicateTickets() {
         List<Ticket> tickets = TicketFixture.createTickets();
         Assert.assertTrue(repository.isValidTickets(tickets));
+    }
 
+    @Test
+    public void shouldValidateATicketSaleTime() {
+        Event event = EventFixture.createEvent();
+        Assert.assertTrue(repository.isValidEventDate(event.getStartTicketDate(), event.getEndTicketDate()));
     }
 }
