@@ -22,12 +22,7 @@ public class EventFixture {
 
         event.setStartTicketDate("2050-02-21T23:59:00");
         event.setEndTicketDate("2051-03-01T23:59:00");
-
-        List<Ticket> tickets = new ArrayList<>();
-        tickets.add(TicketFixture.createTicket(TicketType.VIP));
-        tickets.add(TicketFixture.createTicket(TicketType.BACKSTAGE));
-
-        event.setTickets(tickets);
+        event.setTickets(TicketFixture.createTickets());
         return event;
     }
 }
