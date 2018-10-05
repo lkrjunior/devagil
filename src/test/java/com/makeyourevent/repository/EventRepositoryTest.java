@@ -10,6 +10,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.validation.constraints.AssertTrue;
+import java.util.ArrayList;
+import java.util.List;
+
 public class EventRepositoryTest {
 
     private EventRepository repository;
@@ -48,5 +52,17 @@ public class EventRepositoryTest {
         Double expected = 1000.00;
         TicketType ticket = TicketFixture.createType(TicketType.VIP);
         Assert.assertEquals(expected, ticket.getPrice());
+    }
+
+    @Test
+    public void shouldValidateDuplicateTickets() {
+        List<Ticket> tickets = TicketFixture.createTickets();
+        Assert.assertTrue(repository.isValidTickets(tickets));
+    }
+
+    @Test
+    public void shouldValidateATicketSaleTime() {
+        Event event = EventFixture.createEvent();
+        Assert.assertTrue(repository.isValidEventDate(event.getStartTicketDate(), event.getEndTicketDate()));
     }
 }
