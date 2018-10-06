@@ -10,8 +10,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.validation.constraints.AssertTrue;
-import java.util.ArrayList;
 import java.util.List;
 
 public class EventRepositoryTest {
