@@ -45,18 +45,6 @@ public class EventRepositoryTest {
         Assert.assertNotNull(repository.getListOfEvents());
     }
 
-    @Test
-    public void shouldReturnThePriceOfTicket() {
-        Double expected = 1000.00;
-        TicketType ticket = TicketFixture.createType(TicketType.VIP);
-        Assert.assertEquals(expected, ticket.getPrice());
-    }
-
-    @Test
-    public void shouldValidateDuplicateTickets() {
-        List<Ticket> tickets = TicketFixture.createTickets();
-        Assert.assertTrue(repository.isValidTickets(tickets));
-    }
 
     @Test
     public void shouldValidateATicketSaleTime() {
