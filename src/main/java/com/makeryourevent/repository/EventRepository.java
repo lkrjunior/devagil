@@ -9,6 +9,11 @@ import java.util.stream.Collectors;
 
 public class EventRepository {
 
+    private TicketRepository ticketRepository;
+
+    public EventRepository() {
+        ticketRepository = new TicketRepository();
+    }
 
     public Event getEventById(int id) {
         return new Event();
@@ -23,13 +28,7 @@ public class EventRepository {
             throw new IllegalArgumentException("Invalid date");
         }
 
-        if (CalendarUtils.isExpiredTicket(event.getStartTicketDate(), event.getEndTicketDate())) {
-            throw new IllegalArgumentException("Invalid period ticket");
-        }
-
-        if (!isValidTickets(event.getTickets())) {
-            throw new IllegalArgumentException("Invalid tickets");
-        }
+        ticketRepository.isValidTicket(event);
     }
 
     public List<Event> getListOfEvents() {
@@ -50,11 +49,5 @@ public class EventRepository {
         return !CalendarUtils.isExpiredEvent(start, end);
     }
 
-    public boolean isValidTickets(List<Ticket> tickets) {
-        if (tickets == null || tickets.size() == 0) {
-            return false;
-        }
 
-        return tickets.size() == tickets.stream().collect(Collectors.groupingBy(Ticket::getType)).size();
-    }
 }
