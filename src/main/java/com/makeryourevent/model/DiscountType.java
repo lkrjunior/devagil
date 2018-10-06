@@ -3,10 +3,10 @@ package com.makeryourevent.model;
 public enum DiscountType {
 
     GOLD(0.75),
-    SILVER(0.65),
+    SILVER(0.60),
     STUDENT(0.50),
     OLD(0.50),
-    NONE(0.00);
+    NORMAL(0.00);
 
     private Double discount;
 

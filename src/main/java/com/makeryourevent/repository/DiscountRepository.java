@@ -1,9 +1,6 @@
 package com.makeryourevent.repository;
 
-import com.makeryourevent.model.Discount;
-import com.makeryourevent.model.DiscountType;
-import com.makeryourevent.model.Event;
-import com.makeryourevent.model.Ticket;
+import com.makeryourevent.model.*;
 
 import java.util.Arrays;
 
@@ -21,6 +18,15 @@ public class DiscountRepository {
     public Double calculateDiscount(Ticket ticket, Discount discount) {
         Double ticketPrice = ticket.getPrice();
         Double discountValue = discount.getDiscount();
+
+        if (discount.getType().equals(DiscountType.NORMAL)) {
+            return discount.getDiscount();
+        }
+
         return ticketPrice * discountValue;
+    }
+
+    public Double applyDiscount(Double ticketValue, Double discount) {
+        return ticketValue - discount;
     }
 }

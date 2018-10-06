@@ -26,11 +26,23 @@ public class DiscountRepositoryTest {
     }
 
     @Test
-    public void testDiscount() {
-        Double expectedDiscount = 1000 * 0.75;
+    public void shouldCalculateDiscountForATicket() {
+        Double expectedDiscount = 1000 * 0.75 ;
 
         Ticket ticket = TicketFixture.createTicket(TicketType.VIP);
         Discount discount = DiscountFixture.createDiscount();
         Assert.assertEquals(expectedDiscount, repository.calculateDiscount(ticket, discount));
     }
+
+    @Test
+    public void shouldApplyDiscountForATicket() {
+        Discount discount = DiscountFixture.createDiscount();
+        Ticket ticket = TicketFixture.createTicket(TicketType.VIP);
+
+        Double expectedValue = TicketType.VIP.getPrice() - (TicketType.VIP.getPrice() * discount.getDiscount());
+        Double discountValue = repository.calculateDiscount(ticket, discount);
+
+        Assert.assertEquals(expectedValue, repository.applyDiscount(ticket.getPrice(), discountValue));
+    }
+
 }
